@@ -15,12 +15,15 @@ export default {
         button_color: {
             type: String,
             default: "#20b2aa"
-        }
+        },
+        action: String,
     },
     methods: {
         onClick() {
-            // this.$emit('button-clicked')
             console.log("button clicked", this.text);
+            if(this.action == "record") {
+                console.log("record audio!!")
+            }
         },
     },
     data() {
