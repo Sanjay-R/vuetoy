@@ -1,17 +1,7 @@
 <template>
-    <button :click="onClick()" class="button">
+    <button @click="onClick()" class="button">
         {{text}}
     </button>
-    <!-- <div>
-        <style>
-            :root {
-                --clr : {{color}};
-            }
-        </style>
-    </div> -->
-    <!-- https://www.telerik.com/blogs/passing-variables-to-css-on-a-vue-component 
-    https://stackoverflow.com/questions/47322875/vue-js-dynamic-style-with-variables
-    -->
 </template>
 
 <script>
@@ -30,10 +20,13 @@ export default {
     methods: {
         onClick() {
             // this.$emit('button-clicked')
-            console.log("button clicked");
+            console.log("button clicked", this.text);
         },
     },
     data() {
+        //https://www.infoq.com/news/2021/02/vue-3-css-variable-templating/
+        //https://michaelnthiessen.com/vue-props-vs-data/
+        //https://github.com/vuejs/rfcs/pull/231
         return {
             colord: this.button_color
         }

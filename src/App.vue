@@ -2,17 +2,17 @@
   <Header />
   <h1>Sample text</h1>
   <Button text="Home" />
+  <p>add some space here between the buttons</p>
+  <Button text="Start" button_color="green"></Button>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
 import Button from './components/Button.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
     Header,
     Button,
   }
