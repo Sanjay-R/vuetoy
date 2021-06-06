@@ -1,7 +1,7 @@
 <template>
   <Header />
   <h1>Sample text</h1>
-  <Button />
+  <Button text="Home" />
 </template>
 
 <script>

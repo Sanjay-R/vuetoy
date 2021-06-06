@@ -1,5 +1,5 @@
 <template>
-    <button v-bind:click="onClick()" class="button">
+    <button :click="onClick()" class="button">
         {{text}}
     </button>
     <!-- <div>
@@ -22,12 +22,21 @@ export default {
             type: String,
             default: "default button"
         },
-        color: String,
+        button_color: {
+            type: String,
+            default: "#20b2aa"
+        }
     },
     methods: {
         onClick() {
-            this.$emit('button-clicked')
+            // this.$emit('button-clicked')
+            console.log("button clicked");
         },
+    },
+    data() {
+        return {
+            colord: this.button_color
+        }
     },
 }
 </script>
@@ -35,7 +44,7 @@ export default {
 <style scoped>
 .button {
   background-color: white; 
-  border: 2px solid #20b2aa; /*CHANGE TO INPUT COLOR */
+  border: 2px solid v-bind(colord); /*CHANGE TO INPUT COLOR */
   border-radius: 10%;
   color: black;
   padding: 16px 32px;
@@ -49,7 +58,7 @@ export default {
 }
 
 .button:hover {
-    background-color: lightseagreen;
+    background-color: v-bind(colord);
     color:white;
 }
 </style>
