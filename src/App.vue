@@ -1,17 +1,20 @@
 <template>
   <Header />
-  <h1>Hello World</h1>
+  <h1>Sample text</h1>
+  <Button />
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
+import Button from './components/Button.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
-    Header
+    Header,
+    Button,
   }
 }
 </script>
