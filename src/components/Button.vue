@@ -22,7 +22,7 @@ export default {
         onClick() {
             console.log("button clicked", this.text);
             if(this.action == "record") {
-                console.log("record audio!!")
+                this.$emit("record")
             }
         },
     },
