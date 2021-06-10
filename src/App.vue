@@ -26,13 +26,17 @@ export default {
     callback(data) {
       console.log("event \n", data);
     },
-    startButton() {
+    async startButton() {
       //toggle buttons here
+      //indicate that a recording has started to the user
       //start audio recording
-      var audio = this.recordAudio();
-      audio.play();
+      const aud = await this.recordAudio();
+      
+      aud.play()
     },
-    recordAudio() {
+    async recordAudio() {
+
+      var retaud = new Audio();
       //credits: https://medium.com/@bryanjenningz/how-to-record-and-play-audio-in-javascript-faa1b2b3e49b
       navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
         const mediaRecorder = new MediaRecorder(stream);
@@ -43,21 +47,21 @@ export default {
           audioChunks.push(event.data);
         });
 
-        var audio = new Audio();
-
         mediaRecorder.addEventListener("stop", () => {
           const audioBlob = new Blob(audioChunks);
           const audioUrl = URL.createObjectURL(audioBlob);
-          audio = new Audio(audioUrl);
+          const audio = new Audio(audioUrl);
           audio.play();
+          retaud = audio
         });
 
         setTimeout(() => {
           mediaRecorder.stop();
         }, 3000);
 
-        return audio;
       });
+
+      return retaud;
     },
   },
   data() {
