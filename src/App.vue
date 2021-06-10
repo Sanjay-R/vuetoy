@@ -1,10 +1,9 @@
 <template>
   <Header />
   <h1>Sample text</h1>
-  <section class="sound-clips"></section>
   <Button text="Home" />
   <br />
-  <Button text="Start recording" button_color="green" @click="audioloop()" v-show="showButton.start"></Button>
+  <Button text="Start recording" button_color="green" @click="startButton()" v-show="showButton.start"></Button>
   <div>
     <!-- <button :action="audioloop()"> lkanijcnsikdc </button> -->
     <Button text="Retry" button_color="red" v-show="showButton.retry" />
@@ -29,32 +28,36 @@ export default {
     },
     startButton() {
       //toggle buttons here
-      
       //start audio recording
+      var audio = this.recordAudio();
+      audio.play();
     },
-    audioloop() {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        console.log("getUserMedia supported.");
-        navigator.mediaDevices
-          .getUserMedia(
-            // constraints - only audio needed for this app
-            {
-              audio: true,
-            }
-          )
+    recordAudio() {
+      //credits: https://medium.com/@bryanjenningz/how-to-record-and-play-audio-in-javascript-faa1b2b3e49b
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+        const mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
 
-          // Success callback
-          .then(function (stream) {
-            console.log("Great success!!", stream.log)
-          })
+        const audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", (event) => {
+          audioChunks.push(event.data);
+        });
 
-          // Error callback
-          .catch(function (err) {
-            console.log("The following getUserMedia error occurred: " + err);
-          });
-      } else {
-        console.log("getUserMedia not supported on your browser!");
-      }
+        var audio = new Audio();
+
+        mediaRecorder.addEventListener("stop", () => {
+          const audioBlob = new Blob(audioChunks);
+          const audioUrl = URL.createObjectURL(audioBlob);
+          audio = new Audio(audioUrl);
+          audio.play();
+        });
+
+        setTimeout(() => {
+          mediaRecorder.stop();
+        }, 3000);
+
+        return audio;
+      });
     },
   },
   data() {
@@ -64,8 +67,8 @@ export default {
       },
       showButton: {
         start: true,
-        retry: false,
-        confirm: false,
+        retry: true,
+        confirm: true,
       },
     };
   },

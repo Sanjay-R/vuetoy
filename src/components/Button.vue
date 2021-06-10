@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         onClick() {
-            console.log("button clicked", this.text);
+            console.log("button clicked =>", this.text);
         },
     },
     data() {
