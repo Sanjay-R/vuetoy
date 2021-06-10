@@ -1,11 +1,13 @@
 <template>
   <Header />
   <h1>Sample text</h1>
+  <section class="sound-clips"></section>
   <Button text="Home" />
   <br />
-  <Button text="Start recording" button_color="green" @click="callback('clique')"></Button>
+  <Button text="Start recording" button_color="green" @click="audioloop()" v-show="showButton.start"></Button>
   <div>
     <!-- <button :action="audioloop()"> lkanijcnsikdc </button> -->
+    <Button text="Retry" button_color="red" v-show="showButton.retry" />
   </div>
 </template>
 
@@ -23,8 +25,12 @@ export default {
   },
   methods: {
     callback(data) {
-      //used for audio-recording thing
-      console.log("event", data);
+      console.log("event \n", data);
+    },
+    startButton() {
+      //toggle buttons here
+      
+      //start audio recording
     },
     audioloop() {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -55,6 +61,11 @@ export default {
     return {
       headers: {
         Author: "SR",
+      },
+      showButton: {
+        start: true,
+        retry: false,
+        confirm: false,
       },
     };
   },
