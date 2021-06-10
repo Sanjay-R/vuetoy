@@ -3,9 +3,9 @@
   <h1>Sample text</h1>
   <Button text="Home" />
   <br />
-  <Button text="Start recording" button_color="green" action="record"></Button>
+  <Button text="Start recording" button_color="green" @click="callback('clique')"></Button>
   <div>
-    <!-- <button :action="audioloop()">  </button> -->
+    <!-- <button :action="audioloop()"> lkanijcnsikdc </button> -->
   </div>
 </template>
 

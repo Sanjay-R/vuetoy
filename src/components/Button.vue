@@ -21,9 +21,6 @@ export default {
     methods: {
         onClick() {
             console.log("button clicked", this.text);
-            if(this.action == "record") {
-                this.$emit("record")
-            }
         },
     },
     data() {
